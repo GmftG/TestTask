@@ -1,0 +1,59 @@
+version: '3'
+services:
+  backend:
+    image: nginx
+    volumes:
+      - ./backend:/var/www/html
+      - ./docker/nginx-back.conf:/etc/nginx/conf.d/nginx-back.conf
+    networks:
+      myNetwork:
+        ipv4_address: 192.168.240.3
+
+    
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend:/var/www/html
+      - ./docker/nginx-front.conf:/etc/nginx/conf.d/nginx-front.conf
+
+    networks:
+      myNetwork:
+        ipv4_address: 192.168.240.2
+
+    ports:
+      - 80:80
+
+  php-backend:
+    image: php:8.1-fpm
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      myNetwork:
+        ipv4_address: 192.168.240.4
+
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testDb
+    networks:
+      myNetwork:
+        ipv4_address: 192.168.240.5
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8000:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    networks:
+      myNetwork:
+        ipv4_address: 192.168.240.6
+
+networks:
+  myNetwork:
+    driver: bridge
+    ipam: 
+      config:
+        - subnet: 192.168.240.0/24
