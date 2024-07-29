@@ -5,32 +5,34 @@ User Management API
 Установка
 
 1. Склонируйте репозиторий:
-      git clone https://github.com/GmftG/TestTask.git
-   
+   ```sh
+   git clone https://github.com/GmftG/TestTask.git
+   ```
 
-2. Перейдите в директорию проекта(backend):
-      cd backend
-   
+3. Перейдите в директорию проекта(backend):
+   ```sh
+   cd backend
+   ```
 
-3. Скачайте необходимые зависимости проекта (если не скачалось по умолчанию):
-      composer install
-   
+5. Скачайте необходимые зависимости проекта (если не скачалось по умолчанию):
+   ```sh
+   composer install
+   ```
 
-4. API доступно по адресу: 127.0.0.1/api/users/methodsbelow
+7. API доступно по адресу: 127.0.0.1/api/users/methodsbelow
 
-Использование
+## Использование
 
-Конфигурация
+### Конфигурация
 
 Убедитесь, что ваш веб-сервер настроен для обработки PHP файлов и у вас настроен доступ к базе данных.
 
-Запуск докер файлов
-
-Запустите сервер, чтобы обработать запросы к API (например, используя встроенный сервер PHP):
+### Запуск докер файлов
+```sh
 docker compose up
+```
 
-
-Endpoints
+### Endpoints
 
 Вход пользователя
 
@@ -38,34 +40,37 @@ Endpoints
 - URL: /login
 
 Тело запроса:
+```php
 {
   "username": "ваш_логин",
   "password": "ваш_пароль"
 }
-
+```
 
 Ответ:
-
 В случае успешной аутентификации:
+```php
 {
   "data": {
     "username": "ваш_логин"
   },
   "access": ["ваш_access_token"]
 }
-
+```
 
 В случае ошибки:
+```php
 {
   "error": "authentication failed"
 }
-
+```
 
 В случае использования неподдерживаемого метода HTTP будет возвращен ответ с кодом 422 и сообщением об ошибке:
+```php
 {
   "error": "Method not supported"
 }
-
+```
 
 ---
 
@@ -75,31 +80,35 @@ Endpoints
 - URL: /create
 
 Тело запроса:
+```php
 {
   "username": "ваш_логин",
   "password": "ваш_пароль"
 }
-
+```
 
 Ответ:
 
 В случае успешного создания:
+```php
 {
   "message": "user was created"
 }
-
+```
 
 В случае ошибки на сервере:
+```php
 {
   "error": "Internal server error"
 }
-
+```
 
 В случае использования неподдерживаемого метода HTTP будет возвращен ответ с кодом 422 и сообщением об ошибке:
+```php
 {
   "error": "Method not supported"
 }
-
+```
 
 ---
 
@@ -111,25 +120,28 @@ Endpoints
 Необходим заголовок авторизации: Bearer токен
 
 Ответ:
+```php
 {
   "data": {
     "username": "ваш_логин",
     "id": "ваш_id"
   }
 }
-
+```
 
 В случае ошибки:
+```php
 {
   "error": "authentication failed"
 }
-
+```
 
 В случае использования неподдерживаемого метода HTTP будет возвращен ответ с кодом 422 и сообщением об ошибке:
+```php
 {
   "error": "Method not supported"
 }
-
+```
 
 ---
 
@@ -139,29 +151,33 @@ Endpoints
 - URL: /edit
 
 Тело запроса:
+```php
 {
   "username": "новый_логин",
   "password": "новый_пароль"
 }
-
+```
 
 Ответ:
+```php
 {
   "message": "user was updated"
 }
-
+```
 
 В случае ошибки:
+```php
 {
   "error": "authentication failed"
 }
-
+```
 
 В случае использования неподдерживаемого метода HTTP будет возвращен ответ с кодом 422 и сообщением об ошибке:
+```php
 {
   "error": "Method not supported"
 }
-
+```
 
 ---
 
@@ -173,18 +189,26 @@ Endpoints
 Необходим заголовок авторизации: Bearer токен
 
 Ответ:
+```php
 {
   "message": "user was deleted"
 }
-
+```
 
 В случае ошибки:
+```php
 {
   "error": "authentication failed"
 }
-
+```
 
 В случае использования неподдерживаемого метода HTTP будет возвращен ответ с кодом 422 и сообщением об ошибке:
+```php
+{
+  "error": "Method not supported"
+}
+```
+
 {
   "error": "Method not supported"
 }
